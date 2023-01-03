@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "278c6afb-8368-42a4-8a07-388e4e8dd669",
+		"name": "Sharepoint API Graph",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "354781"
+	},
+	"item": [
+		{
+			"name": "1. Get Auth Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"access_token\", data.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "https://graph.microsoft.com/.default",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{tenant-id}}/oauth2/v2.0/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{tenant-id}}",
+						"oauth2",
+						"v2.0",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get site properties",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get subsites list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get subsite properties",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites/{{subsiteId}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites",
+						"{{subsiteId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Get list of drives inside subsite",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites/{{subsiteId}}/drives",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites",
+						"{{subsiteId}}",
+						"drives"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Get drive properties  inside subsite",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites/{{subsiteId}}/drives/{{revenueAssuranceId}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites",
+						"{{subsiteId}}",
+						"drives",
+						"{{revenueAssuranceId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Get children under drive",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites/{{subsiteId}}/drives/{{revenueAssuranceId}}/root/children",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites",
+						"{{subsiteId}}",
+						"drives",
+						"{{revenueAssuranceId}}",
+						"root",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Download/view file content",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{MSAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/sites/{{sharepointSiteId}}/sites/{{subsiteId}}/drives/{{revenueAssuranceId}}/root:/TemplateRevenueassurance_idconcession_monthyear.xlsx:/content",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"sites",
+						"{{sharepointSiteId}}",
+						"sites",
+						"{{subsiteId}}",
+						"drives",
+						"{{revenueAssuranceId}}",
+						"root:",
+						"TemplateRevenueassurance_idconcession_monthyear.xlsx:",
+						"content"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
