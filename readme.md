@@ -37,7 +37,15 @@ En el nombre poner algo como: **sepr-sharepoint-NOMBRE_SITE**:
 
 Y registrar sin modificar ninguna otra opción y obtenemos el App_id 
 
-Acceder al menú “Api permissions” y añadir el permisos de sharepoint sites.Selected
+Acceder al menú “Api permissions” y añadir el permisos de **Graph** sites.Selected
+
+<mark style="background-color: #FFFF00"></mark>  
+
+<div style="border: 1px solid #cccccc; padding: 10px;background-color: #102044">
+ <strong>Update 17/03/2023</strong><br/> Hasta ahora usábamos el permiso en <strong>Sharepoint</strong> -> sites.Selected pero en algunos tenants no 
+funciona y hemos activado el <strong>Graph</strong> -> sites.Selected
+</div>
+
 
 
 ![](./images/permissions.png)  
